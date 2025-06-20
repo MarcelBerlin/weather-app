@@ -1,0 +1,47 @@
+<div [ngClass]="[bgClass, isDarkMode ? 'dark-mode' : 'light-mode']" class="weather-container">
+
+    <button (click)="toggleDarkMode()">
+        {{ isDarkMode ? '🌞 Light Mode' : '🌙 Dark Mode' }}
+    </button>
+
+
+    <h2>🌦️ Wetter App</h2>
+
+    <label>
+        Stadt:
+        <input type="text" [(ngModel)]="city" placeholder="z.B. Aachen" />
+    </label>
+
+    <button (click)="getWeather()">Wetter abrufen</button>
+
+    <p *ngIf="isLoading" class="spinner">⏳ Lädt...</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <div *ngIf="weatherData && !isLoading && !errorMessage" class="weather-card">
+        <h3>{{ weatherData.name }}</h3>
+
+        <img [src]="getIconPath()" alt="Wetter Icon" />
+
+        <p><span class="material-icons-outlined">thermostat</span> Temperatur: {{ weatherData.main.temp | number:'1.0-0'
+            }} °C</p>
+        <p><span class="material-icons-outlined">device_thermostat</span> Gefühlte Temperatur: {{
+            weatherData.main.feels_like | number:'1.0-0' }} °C</p>
+        <p><span class="material-icons-outlined">water_drop</span> Luftfeuchtigkeit: {{ weatherData.main.humidity }} %
+        </p>
+        <p><span class="material-icons-outlined">air</span> Wind: {{ weatherData.wind.speed }} m/s</p>
+        <p><span class="material-icons-outlined">wb_sunny</span> Sonnenaufgang: {{ weatherData.sys.sunrise * 1000 |
+            date:'HH:mm' }}</p>
+        <p><span class="material-icons-outlined">nightlight</span> Sonnenuntergang: {{ weatherData.sys.sunset * 1000 |
+            date:'HH:mm' }}</p>
+
+    </div>
+
+    <div *ngIf="forecastData.length > 0" class="weather-forecast">
+        <div *ngFor="let item of forecastData" class="forecast-item">
+            <p>{{ item.dt_txt | date: 'EEE, dd.MM.' }}</p>
+            <img [src]="getForecastIconPath(item)" alt="Wetter Icon" />
+            <p>{{ item.main.temp | number:'1.0-0' }} °C</p>
+            <p>{{ item.weather[0].description }}</p>
+        </div>
+    </div>
+</div>
