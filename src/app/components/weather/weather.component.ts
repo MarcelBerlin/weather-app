@@ -1,16 +1,25 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { WeatherService } from '../../services/weather.service';
+import { LottieComponent } from 'ngx-lottie';
+import { AnimationOptions } from 'ngx-lottie';
+
 
 
 @Component({
   selector: 'app-weather',
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    LottieComponent
+  ],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.scss'
 })
+
+
+
 export class WeatherComponent {
 
   city: string = '';
@@ -20,6 +29,10 @@ export class WeatherComponent {
   forecastData: any[] = [];
   bgClass: string = '';
   isDarkMode = false;
+
+  lottieOptions: AnimationOptions = {
+    path: ''
+  };
 
   constructor(private weatherService: WeatherService) { }
 
@@ -39,6 +52,8 @@ export class WeatherComponent {
 
         const main = data.weather[0].main.toLowerCase();
         this.bgClass = main.replace(' ', '-');
+
+        this.updateLottieAnimation(data.weather[0].icon);
       },
       error: (err) => {
         console.error('Fehler:', err);
@@ -51,9 +66,15 @@ export class WeatherComponent {
       next: (data) => {
         console.log('Forecast:', data);
         // Es wird nur jeder 8. Eintrag genommen (1x pro Tag)
-        this.forecastData = data.list.filter((_: any, index: number) => index % 8 === 0);
+        this.forecastData = data.list.filter((_: any, index: number) => index % 5 === 0);
       }
     })
+  }
+
+  updateLottieAnimation(icon: string) {
+    if (icon.startsWith('01')) {
+      this.lottieOptions = { path: }
+    }
   }
 
   getIconPath(): string {
@@ -75,7 +96,7 @@ export class WeatherComponent {
       case '02n': return 'cloudy-night-1.svg';
       case '03d':
       case '03n': return 'cloudy-day-3.svg';
-      case '04d': 
+      case '04d':
       case '04n': return 'cloudy.svg';
       case '09d':
       case '09n': return 'rainy-1.svg';
@@ -91,8 +112,8 @@ export class WeatherComponent {
     }
   }
 
-toggleDarkMode() {
-  this.isDarkMode = !this.isDarkMode;
-}
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode; 
+  }
 }
 

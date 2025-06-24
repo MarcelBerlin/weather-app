@@ -20,6 +20,8 @@
     <div *ngIf="weatherData && !isLoading && !errorMessage" class="weather-card">
         <h3>{{ weatherData.name }}</h3>
 
+        <ng-lottie [options]="lottieOptions" class="weather-animation"></ng-lottie>
+
         <img [src]="getIconPath()" alt="Wetter Icon" />
 
         <p><span class="material-icons-outlined">thermostat</span> Temperatur: {{ weatherData.main.temp | number:'1.0-0'
