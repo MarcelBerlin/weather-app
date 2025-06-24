@@ -73,7 +73,7 @@ export class WeatherComponent {
 
   updateLottieAnimation(icon: string) {
     if (icon.startsWith('01')) {
-      this.lottieOptions = { path: }
+      // this.lottieOptions = { path: }
     }
   }
 
