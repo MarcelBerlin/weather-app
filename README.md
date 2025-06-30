@@ -1,29 +1,31 @@
-# 📝 Angular Weather-App
+# 📝 Angular v20 Weather-App
 
-Ein kleines Übungsprojekt im Rahmen meiner Angular-Weiterentwicklung.  
-Ziel: Deutschlandweite Wetterabfrage mit 5-Tage Vorhersage. Detailierte Informationen über Temperatur, Luftdruck, Feuchtigkeit etc. basierend auf einer API von OpenWeather.com
+Wetter-App mit Echtzeitdaten, LottieAnimationen, 5-Tage Vorhersage und responsive Design 
+
+## 📸 Vorschau 
+
+![App-Screenshot](screenshot_now&forecast.png)
 
 ---
 
 ## 🚀 Features
-- gewünschte Stadt eingeben
-- Aktuelles Wetter inkl. 5-Tage Vorhersage wird angezeigt
+- Live Wetterdaten (OpenWeatherMap API)
+- 5-Tages-Vorhersage
+- Animierte Wetter-Icons dank [LottieFiles](https://lottiefiles.com/)
+- Responsive Design 
+- Material Icons
+- Standalone Angular 20 + Vite Build
 
 ---
 
 ## 🛠️ Tech Stack
-- Angular 20 (Standalone Components)
-- TypeScript
-- API
-- LottieFiles
+- Angular 20 (Standalone)
+- Vite
 - SCSS
-
----
-
-## 📸 Vorschau 
-
-![Screenshot](screenshot_landing.png)
-![Screenshot](screenshot_now&forecast.png)
+- TypeScript
+- Lottie/ngx-lottie
+- OpenWeatherMap API
+- Material Icons
 
 ---
 
