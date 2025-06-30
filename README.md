@@ -22,7 +22,6 @@ Ziel: Deutschlandweite Wetterabfrage mit 5-Tage Vorhersage. Detailierte Informat
 
 ## 📸 Vorschau 
 
-![Screenshot](screenshot_landing.png)
 ![Screenshot](screenshot_now&forecast.png)
 
 ---
