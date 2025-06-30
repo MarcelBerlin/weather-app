@@ -17,7 +17,9 @@
     <p *ngIf="isLoading" class="spinner">⏳ Lädt...</p>
     <p *ngIf="errorMessage">{{ errorMessage }}</p>
 
-    <div *ngIf="weatherData && !isLoading && !errorMessage" class="weather-card">
+    <!-- <div *ngIf="weatherData && !isLoading && !errorMessage" class="weather-card">
+
+
         <h3>{{ weatherData.name }}</h3>
 
         <ng-lottie [options]="lottieOptions" class="weather-animation"></ng-lottie>
@@ -36,7 +38,56 @@
         <p><span class="material-icons-outlined">nightlight</span> Sonnenuntergang: {{ weatherData.sys.sunset * 1000 |
             date:'HH:mm' }}</p>
 
+    </div> -->
+
+    <div *ngIf="weatherData && !isLoading && !errorMessage" class="weather-card">
+        <div class="weather-main">
+            <!-- Wetter-Animation links -->
+            <div class="weather-animation">
+                <ng-lottie [options]="lottieOptions"></ng-lottie>
+            </div>
+
+            <!-- Wetterdaten als Liste -->
+            <ul class="weather-data-list">
+                <li>
+                    <strong>{{ weatherData.name }}</strong>
+                </li>
+                <li>
+                    <span class="material-icons-outlined">thermostat</span>
+                    Temperatur: {{ weatherData.main.temp | number:'1.0-0' }} °C
+                </li>
+                <li>
+                    <span class="material-icons-outlined">device_thermostat</span>
+                    Gefühlte Temperatur: {{ weatherData.main.feels_like | number:'1.0-0' }} °C
+                </li>
+                <li>
+                    <span class="material-icons-outlined">water_drop</span>
+                    Luftfeuchtigkeit: {{ weatherData.main.humidity }} %
+                </li>
+                <li>
+                    <span class="material-icons-outlined">air</span>
+                    Wind: {{ weatherData.wind.speed }} m/s
+                </li>
+                <li>
+                    <span class="material-icons-outlined">wb_sunny</span>
+                    Sonnenaufgang: {{ weatherData.sys.sunrise * 1000 | date:'HH:mm' }}
+                </li>
+                <li>
+                    <span class="material-icons-outlined">nightlight</span>
+                    Sonnenuntergang: {{ weatherData.sys.sunset * 1000 | date:'HH:mm' }}
+                </li>
+                <li>
+                    <span class="material-icons-outlined">cloud</span>
+                    Zustand: {{ weatherData.weather[0].description }}
+                </li>
+                <!-- Optional: Wetter-Icon als kleines Symbol ganz unten -->
+                <!-- <li>
+                    <img [src]="getIconPath()" alt="Wetter Icon" width="48" height="48" style="margin-left:8px;" />
+                </li> -->
+            </ul>
+        </div>
     </div>
+
 
     <div *ngIf="forecastData.length > 0" class="weather-forecast">
         <div *ngFor="let item of forecastData" class="forecast-item">

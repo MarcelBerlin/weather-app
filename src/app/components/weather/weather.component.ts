@@ -31,7 +31,7 @@ export class WeatherComponent {
   isDarkMode = false;
 
   lottieOptions: AnimationOptions = {
-    path: ''
+    path: '/lottie/sunny.json'  // Beispielpfad. 
   };
 
   constructor(private weatherService: WeatherService) { }
@@ -66,16 +66,29 @@ export class WeatherComponent {
       next: (data) => {
         console.log('Forecast:', data);
         // Es wird nur jeder 8. Eintrag genommen (1x pro Tag)
-        this.forecastData = data.list.filter((_: any, index: number) => index % 5 === 0);
+        this.forecastData = data.list.filter((_: any, index: number) => index % 8 === 0);
       }
     })
   }
 
   updateLottieAnimation(icon: string) {
-    if (icon.startsWith('01')) {
-      // this.lottieOptions = { path: }
-    }
+  if (icon.startsWith('01')) {
+    this.lottieOptions = { path: '/lottie/sunny.json' };
+  } else if (icon.startsWith('02') || icon.startsWith('03') || icon.startsWith('04')) {
+    this.lottieOptions = { path: '/lottie/cloudy.json' };
+  } else if (icon.startsWith('09') || icon.startsWith('10')) {
+    this.lottieOptions = { path: '/lottie/rainy.json' };
+  } else if (icon.startsWith('11')) {
+    this.lottieOptions = { path: '/lottie/thunder.json' };
+  } else if (icon.startsWith('13')) {
+    this.lottieOptions = { path: '/lottie/snowy.json' };
+  } else if (icon.startsWith('50')) {
+    this.lottieOptions = { path: '/lottie/mist.json' };
+  } else {
+    this.lottieOptions = { path: '/lottie/sunny.json' }; // fallback
   }
+}
+
 
   getIconPath(): string {
     if (!this.weatherData) return '';
